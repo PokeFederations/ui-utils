@@ -8,7 +8,6 @@
     "build": "webpack build --config webpack/webpack.config.cjs --stats-children",
     "start": "webpack serve --config webpack/webpack.config.cjs",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
-    "lint:changed": "npm run lint $(git diff --name-only HEAD | grep -E '\u005C\u002E(ts|tsx)$' | xargs)",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'"
   },
   "repository": {

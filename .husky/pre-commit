@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run lint:changed
+npm run lint $(git diff --name-only HEAD | grep -E '\.(ts|tsx)$' | xargs)

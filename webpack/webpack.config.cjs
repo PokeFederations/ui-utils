@@ -1,8 +1,28 @@
+const { ModuleFederationPlugin } = require("webpack").container;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const { ModuleFederationPlugin } = require("webpack").container;
 const dependencies = require('../package.json').dependencies;
+
+const moduleFederationConfig = {
+  name: "utils",
+  filename: "remoteEntry.js",
+  exposes: {
+    "./handleHelloWorldAlert": "./src/utils/handleHelloWorldAlert.ts"
+  },
+  shared: {
+    "react": {
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: dependencies['react'],
+    },
+    "react-dom/client": {
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: dependencies['react-dom'],
+    },
+  }
+};
 
 module.exports = {
   mode: "development",
@@ -61,25 +81,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name: "utils",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./handleHelloWorldAlert": "./src/utils/handleHelloWorldAlert.ts"
-      },
-      shared: {
-        "react": {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: dependencies['react'],
-        },
-        "react-dom/client": {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: dependencies['react-dom'],
-        },
-      }
-    }),
+    new ModuleFederationPlugin(moduleFederationConfig),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
