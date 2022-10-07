@@ -10,7 +10,7 @@ const moduleFederationConfig = {
   name: "utils",
   filename: "remoteEntry.js",
   exposes: {
-    "./handleHelloWorldAlert": "./src/utils/handleHelloWorldAlert.ts"
+    "./parsePokemonToPartial": "./src/utils/formatters/parsePokemonToPartial.ts",
   },
   shared: {
     "react": {

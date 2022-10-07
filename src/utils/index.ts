@@ -1,1 +1,1 @@
-export { default as handleHelloWorldAlert } from './handleHelloWorldAlert';
+export { default as parsePokemonToPartial } from './formatters/parsePokemonToPartial';
